@@ -1,11 +1,14 @@
 ﻿#include <windows.h>
+#include <algorithm>
 #include <cstdint>
-#include <vector>
+#include <cstdio>
+#include <cstring>
+#include <cwctype>
+#include <iostream>
+
 #include <string>
 #include <stdexcept>
-#include <cstdio>
-#include <iostream>
-#include <cstring>
+#include <vector>
 
 #include "tweetnacl.h"
 #include "icr_randombytes.h"
@@ -29,18 +32,21 @@ static std::vector<unsigned char> build_payload_from_paths(
 	for (const std::string& path_string : path_list)
 	{
 		std::uint32_t path_length = static_cast<std::uint32_t>(path_string.size());
+		const std::uint32_t path_length_with_terminator = path_length + 1;
 
 		// Append 4 bytes of path_length
 		payload_buffer.insert(
 			payload_buffer.end(),
-			reinterpret_cast<const unsigned char*>(&path_length),
-			reinterpret_cast<const unsigned char*>(&path_length) + sizeof(path_length));
+			reinterpret_cast<const unsigned char*>(&path_length_with_terminator),
+			reinterpret_cast<const unsigned char*>(&path_length_with_terminator) + sizeof(path_length_with_terminator));
 
 		// Append actual path bytes (UTF-8)
 		payload_buffer.insert(
 			payload_buffer.end(),
 			reinterpret_cast<const unsigned char*>(path_string.data()),
 			reinterpret_cast<const unsigned char*>(path_string.data()) + path_length);
+
+		payload_buffer.push_back('\0');
 	}
 
 	return payload_buffer;
@@ -457,12 +463,12 @@ int main()
 	read_key_from_file(L"E:\\workspace\\signer_pri_key.txt", signer_secret_key, crypto_sign_SECRETKEYBYTES);
 
 	std::vector<std::string> path_list = {
-		u8"\\Device\\HarddiskVolume5\\Test\\y.txt",
-		u8"\\Device\\HarddiskVolume5\\Test\\yy.txt",
-		u8"\\Device\\HarddiskVolume5\\Test\\subfolder\\x.txt",
-		u8"\\Device\\HarddiskVolume5\\Test\\subfolder\\xx.txt",
-		u8"\\Device\\HarddiskVolume5\\Test\\subfolder\\y.txt",
-		u8"\\Device\\HarddiskVolume5\\Test\\subfolder\\yy.txt"
+		u8"\\device\\harddiskvolume5\\test\\y.txt",
+		u8"\\device\\harddiskvolume5\\test\\yy.txt",
+		u8"\\device\\harddiskvolume5\\test\\subfolder\\x.txt",
+		u8"\\device\\harddiskvolume5\\test\\subfolder\\xx.txt",
+		u8"\\device\\harddiskvolume5\\test\\subfolder\\y.txt",
+		u8"\\device\\harddiskvolume5\\test\\subfolder\\yy.txt"
 	};
 
 	std::wstring file_path = L"C:\\FileSecDb\\abc.txt";
