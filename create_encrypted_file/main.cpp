@@ -463,6 +463,7 @@ int main()
 	read_key_from_file(L"E:\\workspace\\signer_pri_key.txt", signer_secret_key, crypto_sign_SECRETKEYBYTES);
 
 	std::vector<std::string> path_list = {
+		u8"\\device\\harddiskvolume2\\windows\\minifilter_secure_folder\\blacklist.txt",
 		u8"\\device\\harddiskvolume5\\test\\y.txt",
 		u8"\\device\\harddiskvolume5\\test\\yy.txt",
 		u8"\\device\\harddiskvolume5\\test\\subfolder\\x.txt",
@@ -471,7 +472,7 @@ int main()
 		u8"\\device\\harddiskvolume5\\test\\subfolder\\yy.txt"
 	};
 
-	std::wstring file_path = L"C:\\FileSecDb\\abc.txt";
+	std::wstring file_path = L"C:\\FileSecDb\\blacklist.txt";
 
 	if (!write_blacklist_file(file_path,
 		path_list,
