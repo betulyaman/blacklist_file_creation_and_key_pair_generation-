@@ -456,14 +456,14 @@ int main()
 	// signer_public_key             (into plaintext blob)
 	// signer_secret_key             (to sign)
 	*/
-	read_key_from_file(L"E:\\workspace\\kernel_pub_key.txt", kernel_recipient_public_key, crypto_box_PUBLICKEYBYTES);
-	read_key_from_file(L"E:\\workspace\\sender_encryption_pub_key.txt", sender_encryption_public_key, crypto_box_PUBLICKEYBYTES);
-	read_key_from_file(L"E:\\workspace\\sender_encryption_pri_key.txt", sender_encryption_secret_key, crypto_box_SECRETKEYBYTES);
-	read_key_from_file(L"E:\\workspace\\signer_pub_key.txt", signer_public_key, crypto_sign_PUBLICKEYBYTES);
-	read_key_from_file(L"E:\\workspace\\signer_pri_key.txt", signer_secret_key, crypto_sign_SECRETKEYBYTES);
+	read_key_from_file(L"E:\\workspace\\create_encrypted_file\\kernel_pub_key.txt", kernel_recipient_public_key, crypto_box_PUBLICKEYBYTES);
+	read_key_from_file(L"E:\\workspace\\create_encrypted_file\\sender_encryption_pub_key.txt", sender_encryption_public_key, crypto_box_PUBLICKEYBYTES);
+	read_key_from_file(L"E:\\workspace\\create_encrypted_file\\sender_encryption_pri_key.txt", sender_encryption_secret_key, crypto_box_SECRETKEYBYTES);
+	read_key_from_file(L"E:\\workspace\\create_encrypted_file\\signer_pub_key.txt", signer_public_key, crypto_sign_PUBLICKEYBYTES);
+	read_key_from_file(L"E:\\workspace\\create_encrypted_file\\signer_pri_key.txt", signer_secret_key, crypto_sign_SECRETKEYBYTES);
 
 	std::vector<std::string> path_list = {
-		u8"\\device\\harddiskvolume2\\windows\\minifilter_secure_folder\\blacklist.txt",
+		u8"\\device\\harddiskvolume3\\windows\\minifilter_secure_folder\\blacklist.txt",
 		u8"\\device\\harddiskvolume5\\test\\y.txt",
 		u8"\\device\\harddiskvolume5\\test\\yy.txt",
 		u8"\\device\\harddiskvolume5\\test\\subfolder\\x.txt",
